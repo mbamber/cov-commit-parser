@@ -1,0 +1,19 @@
+name: CI
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.ref }}
+    - run: make alpha
+    - uses: actions/upload-artifact@v2
+      with:
+        name: ccp
+        path: bin/ccp
